@@ -8,7 +8,7 @@ router.get('/getEntries', validate_session, async function(req, resp) {
     const cc = req.query.mycc;
     const entries = {entries: []};
 
-    const details = 'hospital.name doctor.name speciality observations health_status';
+    const details = 'patient.name hospital.name doctor.name speciality observations health_status';
     try {
         if (role == 'patient') {
             entries.entries = await Entry.find({'patient.id': cc}, details).exec();

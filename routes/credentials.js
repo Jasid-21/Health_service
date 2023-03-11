@@ -31,7 +31,7 @@ router.post('/login', async function(req, resp) {
         data.sessions.push(session);
         data.save();
 
-        resp.status(200).send({role: data.role, session, username: data.username});
+        resp.status(200).send({role: data.role, session, username: data.name});
     } catch(error) {
         console.error(error);
         return;
