@@ -16,14 +16,13 @@ router.post('/login', async function(req, resp) {
     const password = req.body.password;
 
     try {
-        console.log(cc);
         const data = await User.findOne({cc}).exec();
         if (data == null) {
             resp.status(404).send({msg: 'User not not found...'});
             return;
         }
 
-        if (bcrypt.compareSync (password, data.password)) {
+        if (!bcrypt.compareSync(password, data.password)) {
             resp.status(404).send({msg: 'User not not found...'});
             return;
         }
@@ -58,8 +57,6 @@ router.post('/logout', validate_session, async function(req, resp) {
 });
 
 router.post('/register', async function(req, resp) {
-    console.log(req.body);
-
     const name = req.body.username;
     const password = req.body.password;
     const role = req.body.role;
